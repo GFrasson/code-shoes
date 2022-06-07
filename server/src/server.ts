@@ -1,15 +1,22 @@
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
 import cors from 'cors';
+
+import { router } from './routes';
+import swaggerFile from './swagger.json';
 
 const app = express();
 
-
 // Middlewares -----------------------------------------------------------------
 app.use(express.json());
+
 app.use(cors({
   origin: "*"
 }));
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+app.use(router);
 
 // Routes ----------------------------------------------------------------------
 app.get('/', (req, res) => {
@@ -24,6 +31,6 @@ app.get('/test', (req, res) => {
 
 
 // Start server ----------------------------------------------------------------
-app.listen('8080', () => {
+app.listen(8080, () => {
   console.log("Server started on http://localhost:8080...")
 })
