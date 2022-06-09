@@ -10,16 +10,39 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+model Brand {
+    id        String    @id @default(uuid())
+    name      String    @unique
+    image     String?
+    products  Product[]
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @default(now())
+
+    @@map("brands")
+}
+
 model Product {
-    id String @id @default(uuid())
-
-    name     String  @unique
-    price    Float
-    image    String?
-    brand_id Int
-
-    created_at DateTime @default(now())
-    updated_at DateTime @default(now())
+    id        String   @id @default(uuid())
+    name      String   @unique
+    price     Float
+    image     String?
+    brand     Brand    @relation(fields: [brandId], references: [id])
+    brandId   String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
 
     @@map("products")
+}
+
+model User {
+    id        String   @id @default(uuid())
+    name      String
+    email     String
+    password  String
+    avatar    String?
+    admin     Boolean
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+
+    @@map("users")
 }
