@@ -10,6 +10,19 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+model User {
+    id        String   @id @default(uuid())
+    name      String
+    email     String
+    password  String
+    image     String?
+    admin     Boolean
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+
+    @@map("users")
+}
+
 model Brand {
     id        String    @id @default(uuid())
     name      String    @unique
@@ -32,17 +45,4 @@ model Product {
     updatedAt DateTime @default(now())
 
     @@map("products")
-}
-
-model User {
-    id        String   @id @default(uuid())
-    name      String
-    email     String
-    password  String
-    avatar    String?
-    admin     Boolean
-    createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
-
-    @@map("users")
 }
