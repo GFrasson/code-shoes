@@ -18,7 +18,7 @@ model User {
     image     String?
     admin     Boolean
     createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
     @@map("users")
 }
@@ -29,7 +29,7 @@ model Brand {
     image     String?
     products  Product[]
     createdAt DateTime  @default(now())
-    updatedAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
 
     @@map("brands")
 }
@@ -42,7 +42,7 @@ model Product {
     brand     Brand    @relation(fields: [brandId], references: [id])
     brandId   String
     createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
     @@map("products")
 }
