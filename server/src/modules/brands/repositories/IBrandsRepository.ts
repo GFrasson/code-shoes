@@ -2,7 +2,7 @@ import { Brand } from "@prisma/client";
 
 interface ICreateBrandDTO {
     name: string;
-    // image?: string;
+    image?: string;
 }
 
 interface IBrandsRepository {

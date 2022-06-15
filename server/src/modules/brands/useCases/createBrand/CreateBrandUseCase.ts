@@ -5,13 +5,13 @@ import { IBrandsRepository } from "../../repositories/IBrandsRepository";
 
 interface IRequest {
     name: string;
-    // image?: string;
+    image?: string;
 }
 
 class CreateBrandUseCase {
     constructor(private brandsRepository: IBrandsRepository) {}
 
-    async execute({ name }: IRequest): Promise<Brand> {
+    async execute({ name, image }: IRequest): Promise<Brand> {
         const brandAlreadyExists = await this.brandsRepository.findByName(name);
 
         if (brandAlreadyExists) {
@@ -20,6 +20,7 @@ class CreateBrandUseCase {
 
         const brand = await this.brandsRepository.create({
             name,
+            image,
         });
 
         return brand;

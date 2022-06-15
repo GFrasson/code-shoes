@@ -41,10 +41,11 @@ class BrandsRepository implements IBrandsRepository {
         return brand;
     }
 
-    async create({ name }: ICreateBrandDTO): Promise<Brand> {
+    async create({ name, image }: ICreateBrandDTO): Promise<Brand> {
         const brand = await prisma.brand.create({
             data: {
                 name,
+                image,
             },
         });
 
