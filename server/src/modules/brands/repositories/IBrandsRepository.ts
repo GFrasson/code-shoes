@@ -6,6 +6,7 @@ interface ICreateBrandDTO {
 }
 
 interface IBrandsRepository {
+    list(): Promise<Brand[]>;
     findById(id: string): Promise<Brand>;
     findByName(name: string): Promise<Brand>;
     create(data: ICreateBrandDTO): Promise<Brand>;

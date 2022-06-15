@@ -16,6 +16,11 @@ class BrandsRepository implements IBrandsRepository {
         return BrandsRepository.INSTANCE;
     }
 
+    async list(): Promise<Brand[]> {
+        const brands = await prisma.brand.findMany();
+        return brands;
+    }
+
     async findById(id: string): Promise<Brand> {
         const brand = await prisma.brand.findUnique({
             where: {
