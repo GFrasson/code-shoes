@@ -8,6 +8,8 @@ interface ICreateProductDTO {
 }
 
 interface IProductsRepository {
+    list(): Promise<Product[]>;
+    findById(id: string): Promise<Product>;
     findByName(name: string): Promise<Product>;
     create(data: ICreateProductDTO): Promise<Product>;
 }

@@ -16,6 +16,24 @@ class ProductsRepository implements IProductsRepository {
         return ProductsRepository.INSTANCE;
     }
 
+    async list(): Promise<Product[]> {
+        const products = await prisma.product.findMany();
+        return products;
+    }
+
+    async findById(id: string): Promise<Product> {
+        const product = await prisma.product.findUnique({
+            where: {
+                id,
+            },
+            include: {
+                brand: true,
+            },
+        });
+
+        return product;
+    }
+
     async findByName(name: string): Promise<Product> {
         const product = await prisma.product.findUnique({
             where: {
