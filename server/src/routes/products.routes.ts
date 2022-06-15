@@ -1,5 +1,6 @@
 import { Router } from "express";
 import multer from "multer";
+import { resolve } from "path";
 
 import uploadConfig from "../config/upload";
 import createProductController from "../modules/products/useCases/createProduct";
@@ -8,7 +9,7 @@ import showProductController from "../modules/products/useCases/showProduct";
 
 const productsRoutes = Router();
 
-const uploadImage = multer(uploadConfig.upload("uploads/img"));
+const uploadImage = multer(uploadConfig.upload(resolve("uploads", "img", "products")));
 
 productsRoutes.get("/", async (req, res) => {
     await listProductsController().handle(req, res);
