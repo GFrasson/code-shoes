@@ -6,6 +6,7 @@ import uploadConfig from "../config/upload";
 import createBrandController from "../modules/brands/useCases/createBrand";
 import listBrandsController from "../modules/brands/useCases/listBrands";
 import showBrandController from "../modules/brands/useCases/showBrand";
+import updateBrandController from "../modules/brands/useCases/updateBrand";
 
 const brandsRoutes = Router();
 
@@ -21,6 +22,10 @@ brandsRoutes.get("/:id", async (req, res) => {
 
 brandsRoutes.post("/", uploadImage.single("image"), async (req, res) => {
     await createBrandController().handle(req, res);
+});
+
+brandsRoutes.put("/:id", uploadImage.single("image"), async (req, res) => {
+    await updateBrandController().handle(req, res);
 });
 
 export { brandsRoutes };

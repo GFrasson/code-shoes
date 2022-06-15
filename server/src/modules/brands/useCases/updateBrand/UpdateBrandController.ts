@@ -6,7 +6,17 @@ class UpdateBrandController {
     constructor(private updateBrandUseCase: UpdateBrandUseCase) {}
 
     async handle(request: Request, response: Response): Promise<Response> {
-        return response.status(200).json();
+        const { id } = request.params;
+        const { name } = request.body;
+        const imageFile = request.file ? request.file.filename : null;
+
+        const brand = await this.updateBrandUseCase.execute({
+            id,
+            name,
+            image: imageFile,
+        });
+
+        return response.status(201).json(brand);
     }
 }
 
