@@ -3,10 +3,11 @@ import { Request, Response } from "express";
 import { ListProductsUseCase } from "./ListProductsUseCase";
 
 class ListProductsController {
-    constructor(private ListProductsUseCase: ListProductsUseCase) {}
+    constructor(private listProductsUseCase: ListProductsUseCase) {}
 
-    handle(request: Request, response: Response): Response {
-        return response.status(200).json();
+    async handle(request: Request, response: Response): Promise<Response> {
+        const products = await this.listProductsUseCase.execute();
+        return response.json(products);
     }
 }
 
