@@ -1,7 +1,9 @@
 import cors from "cors";
 import express from "express";
+import "express-async-errors";
 import swaggerUi from "swagger-ui-express";
 
+import { errorHandler } from "./errors/errorHandler";
 import { router } from "./routes";
 import swaggerFile from "./swagger.json";
 
@@ -18,18 +20,11 @@ app.use(
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
+// Routes ----------------------------------------------------------------------
 app.use(router);
 
-// Routes ----------------------------------------------------------------------
-app.get("/", (req, res) => {
-    console.log("GET /");
-    res.status(200).send("Hello World");
-});
-
-app.get("/test", (req, res) => {
-    console.log("GET /test");
-    res.status(200).send("Rota teste");
-});
+// Error Handler ---------------------------------------------------------------
+app.use(errorHandler);
 
 // Start server ----------------------------------------------------------------
 app.listen(8080, () => {
