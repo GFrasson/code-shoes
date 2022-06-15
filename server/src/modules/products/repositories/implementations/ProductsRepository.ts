@@ -47,12 +47,13 @@ class ProductsRepository implements IProductsRepository {
         return product;
     }
 
-    async create({ name, price, brandId }: ICreateProductDTO): Promise<Product> {
+    async create({ name, price, brandId, image }: ICreateProductDTO): Promise<Product> {
         const product = await prisma.product.create({
             data: {
                 name,
                 price,
                 brandId,
+                image,
             },
             include: {
                 brand: true,

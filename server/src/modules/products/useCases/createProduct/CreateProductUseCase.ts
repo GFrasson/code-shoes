@@ -8,7 +8,7 @@ interface IRequest {
     name: string;
     price: number;
     brandId: string;
-    // image?: string;
+    image: string;
 }
 
 class CreateProductUseCase {
@@ -17,7 +17,7 @@ class CreateProductUseCase {
         private brandsRepository: IBrandsRepository
     ) {}
 
-    async execute({ name, price, brandId }: IRequest): Promise<Product> {
+    async execute({ name, price, brandId, image }: IRequest): Promise<Product> {
         const productAlreadyExists = await this.productsRepository.findByName(name);
 
         if (productAlreadyExists) {
@@ -30,10 +30,17 @@ class CreateProductUseCase {
             throw new AppError("Brand not found", 404);
         }
 
+        const priceNumber = Number(price);
+
+        if (Number.isNaN(priceNumber)) {
+            throw new AppError("Price is not a number");
+        }
+
         const product = await this.productsRepository.create({
             name,
-            price,
+            price: priceNumber,
             brandId,
+            image,
         });
 
         return product;

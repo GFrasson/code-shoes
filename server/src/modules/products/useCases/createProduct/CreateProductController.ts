@@ -7,8 +7,14 @@ class CreateProductController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         const { name, price, brandId } = request.body;
+        const image = request.file.filename;
 
-        const product = await this.createProductUseCase.execute({ name, price, brandId });
+        const product = await this.createProductUseCase.execute({
+            name,
+            price,
+            brandId,
+            image,
+        });
 
         return response.status(201).json(product);
     }

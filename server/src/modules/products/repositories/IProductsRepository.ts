@@ -4,7 +4,7 @@ interface ICreateProductDTO {
     name: string;
     price: number;
     brandId: string;
-    // image?: string;
+    image: string;
 }
 
 interface IProductsRepository {
