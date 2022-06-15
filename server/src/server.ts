@@ -1,6 +1,7 @@
 import cors from "cors";
 import express from "express";
 import "express-async-errors";
+import { join } from "path";
 import swaggerUi from "swagger-ui-express";
 
 import { errorHandler } from "./errors/errorHandler";
@@ -18,10 +19,11 @@ app.use(
     })
 );
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
-
 // Routes ----------------------------------------------------------------------
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(router);
+
+app.use("/uploads", express.static(join(__dirname, "..", "uploads")));
 
 // Error Handler ---------------------------------------------------------------
 app.use(errorHandler);
