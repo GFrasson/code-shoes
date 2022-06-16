@@ -20,10 +20,16 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: var(--dark-300);
   }
+
+  @media (max-width: 700px) {
+    :root {
+      font-size: 87.5%;
+    }
+  }
 `;
 
 export const PageContainer = styled.div`
-  margin: 20px 100px;
+  margin: 1.25rem 6.25rem;
   color: var(--light-300);
 `;
 

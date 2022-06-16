@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import { PageContainer } from '../../GlobalStyle';
 
-export function NewProduct() {
+export function Admin() {
   return (
     <PageContainer>
-      <h1>Cadastrar Produto</h1>
+      <h1>Admin</h1>
     </PageContainer>
   );
 }

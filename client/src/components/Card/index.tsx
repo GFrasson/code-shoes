@@ -1,7 +1,13 @@
-import React from 'react'
-import './style.css'
+import React from 'react';
+import './style.css';
 
-export function Card(props) {
+interface cardProps {
+  name: string;
+  brand: string;
+  price: number;
+}
+
+export function Card({ name, brand, price }: cardProps) {
   return (
     <div className="el-wrapper">
       <div className="box-up">
@@ -12,8 +18,8 @@ export function Card(props) {
         />
         <div className="img-info">
           <div className="info-inner">
-            <span className="p-name">{props.name}</span>
-            <span className="p-company">{props.brand}</span>
+            <span className="p-name">{name}</span>
+            <span className="p-company">{brand}</span>
           </div>
         </div>
       </div>
@@ -24,7 +30,7 @@ export function Card(props) {
         </div>
 
         <a className="cart" href="#">
-          <span className="price">R${props.price}</span>
+          <span className="price">R${price}</span>
           <span className="add-to-cart">
             <span className="txt">Adicionar ao carrinho</span>
           </span>

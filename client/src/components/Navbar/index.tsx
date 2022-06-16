@@ -1,8 +1,8 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { ShoppingCart } from 'phosphor-react';
 
-import { NavbarContainer } from './style'
+import { NavbarContainer } from './style';
 
 export function Navbar() {
   return (
@@ -19,7 +19,7 @@ export function Navbar() {
         </div>
 
         <div className='flex justify-center'>
-          <NavLink to='/cart'><ShoppingCart size={30} /></NavLink>
+          <NavLink className='cart' to='/cart'><ShoppingCart size={30} /></NavLink>
           <button className='user'>
             <div className='user-avatar'>
             </div>

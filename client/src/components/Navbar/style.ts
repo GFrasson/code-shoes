@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const NavbarContainer = styled.div`
   background-color: var(--dark-500);
-  padding: 20px 100px;
+  padding: 1.25rem 6.25rem;
 
   color: var(--light-300);
 
@@ -17,22 +17,22 @@ export const NavbarContainer = styled.div`
     }
 
     a {
-      padding: 0 0.625rem;
       display: flex;
       justify-content: center;
       align-items: center;
       text-decoration: none;
       transition: 0.3s;
       border-radius: 5px;
-
-      &:not(:last-child) {
-        margin-right: 20px;
-      }
     }
 
     .links {
       a {
+        padding: 0 0.625rem;
         position: relative;
+
+        &:not(:last-child) {
+          margin-right: 1.25rem;
+        }
 
         &::after,
         &.active::after {
@@ -51,6 +51,11 @@ export const NavbarContainer = styled.div`
           border-width: 1px;
         }
       }
+    }
+
+    .cart,
+    .user {
+      padding: 0 0.625rem;
     }
 
     .user-avatar {

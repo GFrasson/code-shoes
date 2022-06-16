@@ -1,5 +1,5 @@
-import React from 'react'
-import { ProductsContainer } from './style'
+import React from 'react';
+import { ProductsContainer } from './style';
 
 
 export function Products() {
