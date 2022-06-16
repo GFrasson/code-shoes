@@ -39,6 +39,14 @@ export const HomeContainer = styled.div`
                 width: 50%;
                 height: auto;
                 background-color: var(--dark-500);
+
+                .carousel {
+                    height: 100%;
+                    
+                    img {
+                        object-fit: contain;
+                    }
+                }
             }
         }
 
