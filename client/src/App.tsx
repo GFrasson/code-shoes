@@ -10,7 +10,6 @@ import { Admin } from './pages/Admin';
 import { Error } from './pages/Error';
 
 // Components
-import { Navbar } from './components/Navbar';
 import { Cart } from './pages/Cart';
 
 
@@ -18,8 +17,6 @@ function App() {
 
   return (
     <>
-      <Navbar />
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="products" element={<Products />} />
