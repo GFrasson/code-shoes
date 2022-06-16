@@ -1,20 +1,30 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { ShoppingCart } from 'phosphor-react';
 
 import { NavbarContainer } from './style'
 
 export function Navbar() {
   return (
     <NavbarContainer>
-      <h1>CodeShoes</h1>
-
       <nav>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/products">Produtos</NavLink>
-        <NavLink to="/cart">Carrinho</NavLink>
-        <NavLink to="/new-product">Cadastrar Produto</NavLink>
-        <NavLink to="/new-brand">Cadastrar Marca</NavLink>
-        <NavLink to="/admin">Admin</NavLink>
+        <NavLink className='logo' to='/'>
+          <span className='text-secondary-300'>Code</span>
+          <span className='text-primary-300'>Shoes</span>
+        </NavLink>
+
+        <div className='links flex justify-center'>
+          <NavLink to='/'>HOME</NavLink>
+          <NavLink to='/products'>PRODUTOS</NavLink>
+        </div>
+
+        <div className='flex justify-center'>
+          <NavLink to='/cart'><ShoppingCart size={30} /></NavLink>
+          <button className='user'>
+            <div className='user-avatar'>
+            </div>
+          </button>
+        </div>
       </nav>
     </NavbarContainer>
   );
