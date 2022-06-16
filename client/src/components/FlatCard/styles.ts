@@ -11,6 +11,12 @@ export const FlatCardContainer = styled.div`
         border-radius: 1.25rem;
         position: relative;
 
+        &:hover,
+        &.active {
+            outline: 2px solid var(--primary-300);
+            outline-offset: 2px;
+        }
+
         .images-container {
             width: 8rem;
             padding: 0.5rem;

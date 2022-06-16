@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { FlatCardContainer } from "./styles";
 
-export function FlatCard() {
+interface FlatCardProps {
+    itemNumber: number;
+    isSelected: boolean;
+    onFlatCardSelect: (itemSelected: number) => void;
+}
+
+export function FlatCard({ itemNumber, isSelected, onFlatCardSelect }: FlatCardProps) {
     return (
         <FlatCardContainer>
-            <button className="card-container">
+            <button
+                className={`card-container ${isSelected && "active"}`}
+                onClick={() => onFlatCardSelect(itemNumber)}
+            >
                 <div className="images-container">
                     <img className='brand-image' src="../../../public/img/brands/nike.png" alt="Imagem da marca do tênis" />
                     <img className="shoe-image" src="../../../public/img/products/nike-blue.png" alt="Imagem de um tênis" />    
