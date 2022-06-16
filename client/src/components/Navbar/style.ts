@@ -2,13 +2,18 @@ import styled from 'styled-components';
 
 export const NavbarContainer = styled.div`
   background-color: var(--dark-500);
+  display: flex;
+  align-items: center;
+  height: 6.5rem;
   padding: 1.25rem 6.25rem;
 
   color: var(--light-300);
 
   nav {
+    width: 100%;
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     font-weight: 500;
 
@@ -38,7 +43,7 @@ export const NavbarContainer = styled.div`
         &.active::after {
           content: '';
           position: absolute;
-          bottom: 20%;
+          bottom: 5%;
           left: 10%;
           border: 0px solid var(--primary-300);
           width: 0;
