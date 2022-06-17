@@ -30,9 +30,6 @@ export const ProductsContainer = styled.div`
             & > div {
                 margin-bottom: 3.5rem;
             }
-
-
         }
-
     }
 `;
