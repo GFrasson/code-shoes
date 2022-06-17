@@ -15,7 +15,8 @@ module.exports = {
           500: "#399FB2"
         },
         secondary: {
-          300: "#ED3B2B"
+          300: "#ED3B2B",
+          500: "#CE3426"
         }
       },
       borderRadius: {

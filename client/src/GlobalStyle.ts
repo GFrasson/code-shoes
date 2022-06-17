@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     --primary-300: #3CB0C6;
     --primary-500: #399FB2;
     --secondary-300: #ED3B2B;
+    --secondary-500: #CE3426;
   }
 
   * {
