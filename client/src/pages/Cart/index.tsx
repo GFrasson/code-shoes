@@ -1,9 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar';
 import { WideCard } from '../../components/WideCard';
 import { CartContainer } from './style';
 
 export function Cart() {
+    const navigate = useNavigate();
+
+    function handleClickSuccessButton() {
+        navigate('/success');
+    }
+
     return (
         <CartContainer>
             <Navbar />
@@ -16,7 +23,10 @@ export function Cart() {
                 <WideCard />
                 <WideCard />
 
-                <button className='finish-shopping-button'>
+                <button 
+                    className='finish-shopping-button'
+                    onClick={handleClickSuccessButton}
+                >
                     Finalizar Compra
                 </button>
             </main>
