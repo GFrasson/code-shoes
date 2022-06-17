@@ -19,7 +19,7 @@ export function Products() {
                             Nome
                         </label>
                         <input
-                            className="mr-4 w-[39rem] text-gray-700 focus:ring-primary-300 focus:border-primary-300 shadow-sm sm:text-sm rounded-[0.625rem]"
+                            className="mr-4 w-[39rem] text-gray-700 bg-light-300 focus:ring-primary-300 focus:border-primary-300 shadow-sm sm:text-sm rounded-[0.625rem]"
                             type='text'
                             id='product'
                             name='product'
@@ -48,6 +48,46 @@ export function Products() {
                     </div>
                 </div>
                 <div id='productsContainer'>
+                    <Card 
+                        name='Tênis Nike - Blue'
+                        brand='Nike'
+                        price={199.90}
+                    />
+                    <Card 
+                        name='Tênis Nike - Blue'
+                        brand='Nike'
+                        price={199.90}
+                    />
+                    <Card 
+                        name='Tênis Nike - Blue'
+                        brand='Nike'
+                        price={199.90}
+                    />
+                    <Card 
+                        name='Tênis Nike - Blue'
+                        brand='Nike'
+                        price={199.90}
+                    />
+                    <Card 
+                        name='Tênis Nike - Blue'
+                        brand='Nike'
+                        price={199.90}
+                    />
+                    <Card 
+                        name='Tênis Nike - Blue'
+                        brand='Nike'
+                        price={199.90}
+                    />
+                    <Card 
+                        name='Tênis Nike - Blue'
+                        brand='Nike'
+                        price={199.90}
+                    />
+                    <Card 
+                        name='Tênis Nike - Blue'
+                        brand='Nike'
+                        price={199.90}
+                    />
                     <Card 
                         name='Tênis Nike - Blue'
                         brand='Nike'
