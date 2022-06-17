@@ -15,8 +15,8 @@ export function FlatCard({ itemNumber, isSelected, onFlatCardSelect }: FlatCardP
                 onClick={() => onFlatCardSelect(itemNumber)}
             >
                 <div className="images-container">
-                    <img className='brand-image' src="../../../public/img/brands/nike.png" alt="Imagem da marca do tênis" />
-                    <img className="shoe-image" src="../../../public/img/products/nike-blue.png" alt="Imagem de um tênis" />    
+                    <img className='brand-image' src="../../../img/brands/nike.png" alt="Imagem da marca do tênis" />
+                    <img className="shoe-image" src="../../../img/products/nike-blue.png" alt="Imagem de um tênis" />    
                 </div>
                 <div className="content-box">
                     <div className="content">

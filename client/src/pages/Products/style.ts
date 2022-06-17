@@ -1,22 +1,12 @@
 import styled from 'styled-components';
 
 export const ProductsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+    .products-page {
+        margin: 4rem 6.25rem;
 
-  input {
-    width: 300px;
-    padding: 5px 10px;
-    margin: 30px 50px 0;
-    align-self: flex-start;
-  }
-
-  div#productsContainer {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+        .search {
+            padding: 0.5rem;
+            border-radius: 1.25rem;
+        }
+    }
 `;

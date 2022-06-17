@@ -39,13 +39,13 @@ export function Home() {
                             showIndicators={false}
                         >
                             <div>
-                                <img src="../../../public/img/products/nike-blue.png" />
+                                <img src="../../../img/products/nike-blue.png" />
                             </div>
                             <div>
-                                <img src="../../../public/img/products/nike-blue.png" />
+                                <img src="../../../img/products/nike-blue.png" />
                             </div>
                             <div>
-                                <img src="../../../public/img/products/nike-blue.png" />
+                                <img src="../../../img/products/nike-blue.png" />
                             </div>
                         </Carousel>
                     </div>
