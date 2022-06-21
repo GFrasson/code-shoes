@@ -23,8 +23,10 @@ function App() {
         <Route path="products" element={<Products />} />
         <Route path="cart" element={<Cart />} />
         <Route path="success" element={<SuccessfulPurchase />} />
-        <Route path="new-product" element={<NewProduct />} />
-        <Route path="new-brand" element={<NewBrand />} />
+        <Route path="admin/products/create" element={<NewProduct />} />
+        <Route path="admin/products/:id/edit" element={<NewProduct />} />
+        <Route path="admin/brands/create" element={<NewBrand />} />
+        <Route path="admin/brands/:id/edit" element={<NewBrand />} />
         <Route path="admin" element={<Admin />} />
 
         <Route path="*" element={<Error />} />
