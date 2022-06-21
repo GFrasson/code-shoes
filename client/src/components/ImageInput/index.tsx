@@ -1,5 +1,5 @@
 import { X } from "phosphor-react";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { ImageInputContainer } from "./style";
 
 interface ImageInputProps {
@@ -10,8 +10,8 @@ interface ImageInputProps {
 export function ImageInput({ image, onImageUpdate }: ImageInputProps) {
     const [imageURL, setImageURL] = useState<string | null>(null);
 
-    function handleImageUpdate(event: any) {
-        if (!event.target.files.length) {
+    function handleImageUpdate(event: ChangeEvent<HTMLInputElement>) {
+        if (!event.target.files) {
             return;
         }
                 
@@ -47,7 +47,7 @@ export function ImageInput({ image, onImageUpdate }: ImageInputProps) {
                 name="image-input"
                 type="file"
                 accept=".png, .jpg, .jpeg"
-                onChange={(event) => handleImageUpdate(event)}
+                onChange={handleImageUpdate}
                 className="p-2 bg-zinc-800 rounded-md border-transparent hover:bg-zinc-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500"
             />
         </ImageInputContainer>
