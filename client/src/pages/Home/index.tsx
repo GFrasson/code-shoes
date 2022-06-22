@@ -8,6 +8,29 @@ import { HomeContainer } from './style';
 
 export function Home() {
     const [carouselItemSelected, setCarouselItemSelected] = useState(0);
+    const products = [
+        {
+            id: '123',
+            name: 'Nike - Blue',
+            price: 199.90,
+            image: '../../../img/products/nike-blue.png',
+            brandImage: '../../../img/brands/nike.png'
+        },
+        {
+            id: '1234',
+            name: 'Nike - Red',
+            price: 200.0,
+            image: '../../../img/products/nike-blue.png',
+            brandImage: '../../../img/brands/nike.png'
+        },
+        {
+            id: '1235',
+            name: 'Nike - Green',
+            price: 150.0,
+            image: '../../../img/products/nike-blue.png',
+            brandImage: '../../../img/brands/nike.png'
+        }
+    ];
 
     function onFlatCardSelect(itemSelected: number): void {
         setCarouselItemSelected(itemSelected);
@@ -20,8 +43,8 @@ export function Home() {
             <main>
                 <div className="page-content">
                     <div className="content-container">
-                        <h1 className='product-name-title'>Tênis Nike - Running</h1>
-                        <p className='price text-primary-300'>R$199,90</p>
+                        <h1 className='product-name-title'>Tênis { products[carouselItemSelected].name }</h1>
+                        <p className='price text-primary-300'>R${ products[carouselItemSelected].price.toFixed(2) }</p>
                     </div>
                     <div className="carousel-container">
                         <Carousel
@@ -38,34 +61,35 @@ export function Home() {
                             showThumbs={false}
                             showIndicators={false}
                         >
-                            <div>
-                                <img src="../../../img/products/nike-blue.png" />
-                            </div>
-                            <div>
-                                <img src="../../../img/products/nike-blue.png" />
-                            </div>
-                            <div>
-                                <img src="../../../img/products/nike-blue.png" />
-                            </div>
+                            {
+                                products.map(product => {
+                                    return (
+                                        <div>
+                                            <img src={product.image} />
+                                        </div>
+                                    );
+                                })
+                            }
                         </Carousel>
                     </div>
                 </div>
                 <div className="flat-cards-container">
-                    <FlatCard 
-                        itemNumber={0}
-                        isSelected={carouselItemSelected === 0}
-                        onFlatCardSelect={onFlatCardSelect}
-                    />
-                    <FlatCard
-                        itemNumber={1}
-                        isSelected={carouselItemSelected === 1}
-                        onFlatCardSelect={onFlatCardSelect}
-                    />
-                    <FlatCard
-                        itemNumber={2}
-                        isSelected={carouselItemSelected === 2}
-                        onFlatCardSelect={onFlatCardSelect}
-                    />
+                    {
+                        products.map((product, index) => {
+                            return (
+                                <FlatCard 
+                                    key={product.id}
+                                    productName={product.name}
+                                    productPrice={product.price}
+                                    productImageURL={product.image}
+                                    brandImageURL={product.brandImage}
+                                    itemNumber={index}
+                                    isSelected={carouselItemSelected === index}
+                                    onFlatCardSelect={onFlatCardSelect}
+                                />
+                            );
+                        })
+                    }
                 </div>
             </main>
         </HomeContainer>

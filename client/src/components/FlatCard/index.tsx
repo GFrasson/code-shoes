@@ -2,26 +2,30 @@ import React, { useState } from "react";
 import { FlatCardContainer } from "./styles";
 
 interface FlatCardProps {
+    productName: string;
+    productPrice: number;
+    productImageURL: string;
+    brandImageURL: string;
     itemNumber: number;
     isSelected: boolean;
     onFlatCardSelect: (itemSelected: number) => void;
 }
 
-export function FlatCard({ itemNumber, isSelected, onFlatCardSelect }: FlatCardProps) {
+export function FlatCard(props: FlatCardProps) {
     return (
         <FlatCardContainer>
             <button
-                className={`card-container ${isSelected && "active"}`}
-                onClick={() => onFlatCardSelect(itemNumber)}
+                className={`card-container ${props.isSelected && "active"}`}
+                onClick={() => props.onFlatCardSelect(props.itemNumber)}
             >
                 <div className="images-container">
-                    <img className='brand-image' src="../../../img/brands/nike.png" alt="Imagem da marca do tênis" />
-                    <img className="shoe-image" src="../../../img/products/nike-blue.png" alt="Imagem de um tênis" />    
+                    <img className='brand-image' src={props.brandImageURL} alt="Imagem da marca do tênis" />
+                    <img className="shoe-image" src={props.productImageURL} alt="Imagem de um tênis" />    
                 </div>
                 <div className="content-box">
                     <div className="content">
-                        <div className="title">Nike - Blue</div>
-                        <small className="price">R$199,90</small>
+                        <div className="title">{ props.productName }</div>
+                        <small className="price">R${ props.productPrice.toFixed(2) }</small>
                     </div>
                 </div>
             </button>

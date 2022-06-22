@@ -21,7 +21,7 @@ export const HomeContainer = styled.div`
                 margin-bottom: 12rem;
 
                 .product-name-title {
-                    word-break: break-all;
+                    /* word-break: break-all; */
                     text-transform: uppercase;
                     max-width: 25rem;
                     line-height: 7rem;
