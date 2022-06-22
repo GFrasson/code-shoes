@@ -1,10 +1,19 @@
 import React from 'react'
-import { PageContainer } from '../../GlobalStyle'
+import { Navbar } from '../../components/Navbar';
+import { ErrorContainer } from './style';
 
 export function Error() {
   return (
-    <PageContainer>
-      <h1>Desculpe, essa página não existe</h1>
-    </PageContainer>
+    <>
+      <Navbar />
+      <ErrorContainer>
+        <h1 className='error-status'>
+          <span>4</span>
+          <span>0</span>
+          <span>4</span>
+        </h1>
+        <p className='error-message'>Desculpe, esta página não existe...</p>
+      </ErrorContainer>
+    </>
   );
 }
