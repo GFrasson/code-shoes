@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { Products } from './pages/Products';
 import { NewProduct } from './pages/NewProduct';
 import { NewBrand } from './pages/NewBrand';
+import { Login } from './pages/Login';
 import { Admin } from './pages/Admin';
 import { Error } from './pages/Error';
 import { Cart } from './pages/Cart';
@@ -23,6 +24,7 @@ function App() {
         <Route path="products" element={<Products />} />
         <Route path="cart" element={<Cart />} />
         <Route path="success" element={<SuccessfulPurchase />} />
+        <Route path="login" element={<Login />} />
         <Route path="admin/products/create" element={<NewProduct />} />
         <Route path="admin/products/:id/edit" element={<NewProduct />} />
         <Route path="admin/brands/create" element={<NewBrand />} />
