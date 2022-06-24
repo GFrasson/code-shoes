@@ -1,4 +1,4 @@
-import { Product } from "@prisma/client";
+import { Brand, Product } from "@prisma/client";
 
 interface ICreateProductDTO {
     name: string;
@@ -7,11 +7,15 @@ interface ICreateProductDTO {
     image: string;
 }
 
+interface IProduct extends Product {
+    brand: Brand;
+}
+
 interface IProductsRepository {
-    list(): Promise<Product[]>;
+    list(): Promise<IProduct[]>;
     findById(id: string): Promise<Product>;
     findByName(name: string): Promise<Product>;
     create(data: ICreateProductDTO): Promise<Product>;
 }
 
-export { IProductsRepository, ICreateProductDTO };
+export { IProductsRepository, ICreateProductDTO, IProduct };

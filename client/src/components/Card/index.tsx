@@ -2,18 +2,25 @@ import React from 'react';
 import { CardContainer } from './style';
 import { ShoppingCart } from 'phosphor-react';
 
+interface Brand {
+    id: string;
+    name: string;
+    image?: string;
+}
+
 interface cardProps {
     name: string;
-    brand: string;
+    image: string;
+    brand: Brand;
     price: number;
 }
 
-export function Card({ name, brand, price }: cardProps) {
+export function Card({ name, image, brand, price }: cardProps) {
     return (
         <CardContainer>
             <div className="images-container">
-                <img className='logo-image' src="../../../img/brands/nike.png" alt="Imagem da marca do tênis" />
-                <img className="shoe-image" src="../../../img/products/nike-blue.png" alt="Imagem de um tênis" />
+                <img className='logo-image' src={brand.image} alt="Imagem da marca do tênis" />
+                <img className="shoe-image" src={image} alt="Imagem de um tênis" />
             </div>
             <div className="content-box">
                 <div className="content">

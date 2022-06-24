@@ -64,7 +64,7 @@ export function Home() {
                             {
                                 products.map(product => {
                                     return (
-                                        <div>
+                                        <div key={product.id}>
                                             <img src={product.image} />
                                         </div>
                                     );
