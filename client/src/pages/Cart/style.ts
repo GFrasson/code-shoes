@@ -10,6 +10,12 @@ export const CartContainer = styled.div`
         flex-direction: column;
         align-items: center;
 
+        .empty-cart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .page-title {
             font-weight: 600;
             font-size: 2.5rem;

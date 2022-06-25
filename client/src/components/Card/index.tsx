@@ -1,34 +1,30 @@
 import React from 'react';
 import { CardContainer } from './style';
 import { ShoppingCart } from 'phosphor-react';
-
-interface Brand {
-    id: string;
-    name: string;
-    image?: string;
-}
+import { Product } from '../../pages/Products';
 
 interface cardProps {
-    name: string;
-    image: string;
-    brand: Brand;
-    price: number;
+    product: Product;
+    onAddToCart: (product: Product) => void;
 }
 
-export function Card({ name, image, brand, price }: cardProps) {
+export function Card({ product, onAddToCart }: cardProps) {
     return (
         <CardContainer>
             <div className="images-container">
-                <img className='logo-image' src={brand.image} alt="Imagem da marca do tênis" />
-                <img className="shoe-image" src={image} alt="Imagem de um tênis" />
+                <img className='logo-image' src={product.brand.image} alt="Imagem da marca do tênis" />
+                <img className="shoe-image" src={product.image} alt="Imagem de um tênis" />
             </div>
             <div className="content-box">
                 <div className="content">
-                    <div className="title">{ name }</div>
-                    <small className="price">R${ price.toFixed(2) }</small>
+                    <div className="title">{ product.name }</div>
+                    <small className="price">R${ product.price.toFixed(2) }</small>
                 </div>
             </div>
-            <button className='cart-button'>
+            <button 
+                className='cart-button' 
+                onClick={() => onAddToCart(product)}
+            >
                 <ShoppingCart size={16} />
                 <span>+ Carrinho</span>
             </button>

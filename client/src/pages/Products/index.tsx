@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { CartContext } from '../../App';
 import { Card } from '../../components/Card';
 import { Navbar } from '../../components/Navbar';
 import api from '../../services/api';
@@ -11,7 +12,7 @@ interface Brand {
     image?: string;
 }
 
-interface Product {
+export interface Product {
     id: string;
     name: string;
     price: number;
@@ -19,7 +20,11 @@ interface Product {
     brand: Brand;
 }
 
-export function Products() {
+interface ProductsProps {
+    addToCart: (product: Product) => void;
+}
+
+export function Products({ addToCart }: ProductsProps) {
     const [products, setProducts] = useState<Product[]>();
     const [brands, setBrands] = useState<Brand[]>();
 
@@ -34,7 +39,12 @@ export function Products() {
     }, []);
 
     if (!brands || !products) {
-        return <p>Carregando...</p>
+        return (
+            <ProductsContainer>
+                <Navbar />
+                <p className='text-light-300 font-semibold'>Carregando...</p>
+            </ProductsContainer>
+        );
     }
 
     return (
@@ -94,10 +104,8 @@ export function Products() {
                             return (
                                 <Card 
                                     key={product.id}
-                                    name={product.name}
-                                    image={product.image}
-                                    price={product.price}
-                                    brand={product.brand}
+                                    product={product}
+                                    onAddToCart={addToCart}
                                 />
                             );
                         })

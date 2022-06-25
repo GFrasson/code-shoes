@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { ShoppingCart, SmileySticker, Package, UserGear,  SignIn, SignOut } from 'phosphor-react';
 
 import { NavbarContainer } from './style';
+import { CartContext } from '../../App';
 
 export function Navbar() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const cart = useContext(CartContext);
 
     return (
         <NavbarContainer>
@@ -21,7 +23,12 @@ export function Navbar() {
                 </div>
 
                 <div className='flex justify-center'>
-                    <NavLink className='cart' to='/cart'><ShoppingCart size={30} /></NavLink>
+                    <NavLink className='cart' to='/cart'>
+                        <div className="cart-container">
+                            <ShoppingCart size={30} />
+                            <span className='cart-counter'>{ cart.length }</span>
+                        </div>
+                    </NavLink>
 
                     <nav className="md:flex space-x-10">
                         <div className="relative">

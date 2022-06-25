@@ -58,7 +58,26 @@ export const NavbarContainer = styled.div`
       }
     }
 
-    .cart,
+    .cart {
+      padding: 0 0.625rem;
+      
+      .cart-container {
+        position: relative;
+        
+        .cart-counter {
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          text-align: center;
+          line-height: 1rem;
+          background-color: var(--secondary-300);
+          width: 1rem;
+          height: 1rem;
+          border-radius: 50%;
+        }
+      }
+    }
+    
     .user {
       padding: 0 0.625rem;
     }
