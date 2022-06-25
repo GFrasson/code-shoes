@@ -60,7 +60,7 @@ export function Navbar() {
                                         <Link to="/admin" className="-m-3 p-3 flex items-start rounded-lg hover:bg-dark-300">
                                             <UserGear size={18} />
                                             <div className="ml-4">
-                                                <p className="text-base font-medium text-light-300">Admin</p>
+                                                <p className="text-base font-medium text-light-300">Área administrativa</p>
                                                 <p className="mt-1 text-sm text-gray-500">Acessar a área administrativa</p>
                                             </div>
                                         </Link>
