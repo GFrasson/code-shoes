@@ -1,10 +1,35 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { ImageInput } from '../../components/ImageInput';
 import { Navbar } from '../../components/Navbar';
+
+import api from '../../services/api';
+
+import { promiseRegisterNotify } from '../../utils/promiseRegisterNotify';
+
 import { NewBrandContainer } from './style';
 
 export function NewBrand() {
+    const navigate = useNavigate();
+
+    const [name, setName] = useState<string>('');
     const [image, setImage] = useState<File | null>(null);
+
+    async function handleSubmit(event: FormEvent) {
+        event.preventDefault();
+
+        const data = new FormData();
+
+        data.append('name', name);
+        if (image) {
+            data.append('image', image);
+        }
+
+        await promiseRegisterNotify(api.post('/brands', data));
+
+        navigate('/admin');
+    }
 
     return (
         <NewBrandContainer>
@@ -13,7 +38,7 @@ export function NewBrand() {
             <main>
                 <h1 className='form-title'>Cadastrar Marca</h1>
 
-                <form className='page-form' action="">
+                <form className='page-form' onSubmit={handleSubmit}>
                     <section className='md:grid md:grid-cols-2 md:gap-6'>
                         <div className="form-group">
                             <label
@@ -29,6 +54,8 @@ export function NewBrand() {
                                 name='name'
                                 autoComplete="given-brand"
                                 placeholder='Nome da marca...'
+                                onChange={(event) => setName(event.target.value)}
+                                required
                             />
                         </div>
 

@@ -12,7 +12,8 @@ import { Error } from './pages/Error';
 import { Cart } from './pages/Cart';
 import { SuccessfulPurchase } from './pages/SuccessfulPurchase';
 
-// Components
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const CartContext = createContext<Product[]>([]);
 
@@ -58,6 +59,19 @@ function App() {
 
         <Route path="*" element={<Error />} />
       </Routes>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <ToastContainer />
     </CartContext.Provider>
   );
 }
