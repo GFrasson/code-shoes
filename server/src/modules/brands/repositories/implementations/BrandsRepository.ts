@@ -1,4 +1,4 @@
-import { Brand } from "@prisma/client";
+import { Brand, Product } from "@prisma/client";
 
 import { prisma } from "../../../../database/prisma";
 import {
@@ -30,10 +30,13 @@ class BrandsRepository implements IBrandsRepository {
         return brands;
     }
 
-    async findById(id: string): Promise<Brand> {
+    async findById(id: string, includeProducts = false): Promise<Brand & { products: Product[] }> {
         const brand = await prisma.brand.findUnique({
             where: {
                 id,
+            },
+            include: {
+                products: includeProducts,
             },
         });
 
