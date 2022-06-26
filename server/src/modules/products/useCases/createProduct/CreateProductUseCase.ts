@@ -18,6 +18,15 @@ class CreateProductUseCase {
     ) {}
 
     async execute({ name, price, brandId, image }: IRequest): Promise<Product> {
+        console.log(name);
+        console.log(price);
+        console.log(brandId);
+        console.log(image);
+
+        if (!image || !price || !name || !brandId) {
+            throw new AppError("Required field is missing");
+        }
+
         const productAlreadyExists = await this.productsRepository.findByName(name);
 
         if (productAlreadyExists) {
