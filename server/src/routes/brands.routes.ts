@@ -4,6 +4,7 @@ import { resolve } from "path";
 
 import uploadConfig from "../config/upload";
 import createBrandController from "../modules/brands/useCases/createBrand";
+import deleteBrandController from "../modules/brands/useCases/deleteBrand";
 import listBrandsController from "../modules/brands/useCases/listBrands";
 import showBrandController from "../modules/brands/useCases/showBrand";
 import updateBrandController from "../modules/brands/useCases/updateBrand";
@@ -26,6 +27,10 @@ brandsRoutes.post("/", uploadImage.single("image"), async (req, res) => {
 
 brandsRoutes.put("/:id", uploadImage.single("image"), async (req, res) => {
     await updateBrandController().handle(req, res);
+});
+
+brandsRoutes.delete("/:id", async (req, res) => {
+    await deleteBrandController().handle(req, res);
 });
 
 export { brandsRoutes };

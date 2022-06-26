@@ -21,6 +21,10 @@ interface Product {
 export function Admin() {
     const [brands, setBrands] = useState<Brand[]>([]);
 
+    function onBrandDelete(deletedBrandId: string) {
+        setBrands(brands.filter(brand => brand.id !== deletedBrandId));
+    }
+
     function onProductDelete(deletedProductId: string) {
         setBrands(
             brands.map(brand => {
@@ -60,6 +64,7 @@ export function Admin() {
                                             brandImage={brand.image}
                                             products={brand.products}
                                             onProductDelete={onProductDelete}
+                                            onBrandDelete={onBrandDelete}
                                         />
                                     );
                                 })

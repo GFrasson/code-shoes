@@ -74,6 +74,20 @@ class BrandsRepository implements IBrandsRepository {
 
         return updatedBrand;
     }
+
+    async delete(id: string): Promise<void> {
+        await prisma.product.deleteMany({
+            where: {
+                brandId: id,
+            },
+        });
+
+        await prisma.brand.delete({
+            where: {
+                id,
+            },
+        });
+    }
 }
 
 export { BrandsRepository };

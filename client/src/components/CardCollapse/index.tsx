@@ -12,6 +12,7 @@ interface CardCollapseProps {
     brandImage?: string;
     products: Product[];
     onProductDelete: (deletedProductId: string) => void;
+    onBrandDelete: (deletedBrandId: string) => void;
 }
 
 interface Product {
@@ -25,7 +26,16 @@ export function CardCollapse(props: CardCollapseProps) {
     const [isCardOpen, setIsCardOpen] = useState(false);
 
     async function handleBrandDelete(brandId: string) {
+        try {
+            await promiseNotify(api.delete(`/brands/${brandId}`), {
+                pending: "Deletando marca",
+                success: "Marca deletada com sucesso!",
+                error: "Erro ao deletar a marca"
+            });
 
+            props.onBrandDelete(brandId);
+        } catch (err) {
+        }
     } 
 
     async function handleProductDelete(productId: string) {

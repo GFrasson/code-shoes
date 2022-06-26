@@ -21,6 +21,7 @@ interface IBrandsRepository {
     findByName(name: string): Promise<Brand>;
     create(data: ICreateBrandDTO): Promise<Brand>;
     update(data: IUpdateBrandDTO): Promise<Brand>;
+    delete(id: string): Promise<void>;
 }
 
 export { IBrandsRepository, ICreateBrandDTO, IUpdateBrandDTO, IBrandsListOptions };
