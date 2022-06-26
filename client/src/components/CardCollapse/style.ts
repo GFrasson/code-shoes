@@ -35,7 +35,7 @@ export const CardCollapseContainer = styled.div`
         }
         
         .title-container {
-            width: 4rem;
+            width: 8rem;
         
             h2 {
                 font-size: 1.5rem;
