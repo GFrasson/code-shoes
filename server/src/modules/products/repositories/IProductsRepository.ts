@@ -11,11 +11,15 @@ interface IProductWithBrand extends Product {
     brand: Brand;
 }
 
+interface IProductsListOptions {
+    take?: number;
+}
+
 interface IProductsRepository {
-    list(): Promise<IProductWithBrand[]>;
+    list(options?: IProductsListOptions): Promise<IProductWithBrand[]>;
     findById(id: string): Promise<Product>;
     findByName(name: string): Promise<Product>;
     create(data: ICreateProductDTO): Promise<Product>;
 }
 
-export { IProductsRepository, ICreateProductDTO, IProductWithBrand };
+export { IProductsRepository, ICreateProductDTO, IProductWithBrand, IProductsListOptions };

@@ -1,7 +1,12 @@
 import { Brand } from "@prisma/client";
 
 import { prisma } from "../../../../database/prisma";
-import { IBrandsRepository, ICreateBrandDTO, IUpdateBrandDTO } from "../IBrandsRepository";
+import {
+    IBrandsListOptions,
+    IBrandsRepository,
+    ICreateBrandDTO,
+    IUpdateBrandDTO,
+} from "../IBrandsRepository";
 
 class BrandsRepository implements IBrandsRepository {
     private static INSTANCE: BrandsRepository;
@@ -16,10 +21,10 @@ class BrandsRepository implements IBrandsRepository {
         return BrandsRepository.INSTANCE;
     }
 
-    async list(includeProducts = false): Promise<Brand[]> {
+    async list(options?: IBrandsListOptions): Promise<Brand[]> {
         const brands = await prisma.brand.findMany({
             include: {
-                products: includeProducts,
+                products: options.includeProducts || false,
             },
         });
         return brands;

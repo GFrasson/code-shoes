@@ -1,7 +1,12 @@
 import { Product } from "@prisma/client";
 
 import { prisma } from "../../../../database/prisma";
-import { ICreateProductDTO, IProductsRepository, IProductWithBrand } from "../IProductsRepository";
+import {
+    ICreateProductDTO,
+    IProductsListOptions,
+    IProductsRepository,
+    IProductWithBrand,
+} from "../IProductsRepository";
 
 class ProductsRepository implements IProductsRepository {
     private static INSTANCE: ProductsRepository;
@@ -16,11 +21,15 @@ class ProductsRepository implements IProductsRepository {
         return ProductsRepository.INSTANCE;
     }
 
-    async list(): Promise<IProductWithBrand[]> {
+    async list(options?: IProductsListOptions): Promise<IProductWithBrand[]> {
         const products = await prisma.product.findMany({
             include: {
                 brand: true,
             },
+            orderBy: {
+                createdAt: "desc",
+            },
+            ...options,
         });
 
         return products;

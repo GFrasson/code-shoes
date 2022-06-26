@@ -4,6 +4,7 @@ import { resolve } from "path";
 
 import uploadConfig from "../config/upload";
 import createProductController from "../modules/products/useCases/createProduct";
+import listLatestProdutsController from "../modules/products/useCases/listLatestProducts";
 import listProductsController from "../modules/products/useCases/listProducts";
 import showProductController from "../modules/products/useCases/showProduct";
 
@@ -13,6 +14,10 @@ const uploadImage = multer(uploadConfig.upload(resolve("uploads", "img", "produc
 
 productsRoutes.get("/", async (req, res) => {
     await listProductsController().handle(req, res);
+});
+
+productsRoutes.get("/latest", async (req, res) => {
+    await listLatestProdutsController().handle(req, res);
 });
 
 productsRoutes.get("/:id", async (req, res) => {
