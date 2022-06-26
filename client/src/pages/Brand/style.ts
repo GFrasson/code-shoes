@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NewBrandContainer = styled.div`
+export const BrandContainer = styled.div`
     main {
         color: var(--light-300);
         margin: 4rem;

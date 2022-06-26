@@ -5,7 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Product, Products } from './pages/Products';
 import { NewProduct } from './pages/NewProduct';
-import { NewBrand } from './pages/NewBrand';
+import { Brand } from './pages/Brand';
 import { Login } from './pages/Login';
 import { Admin } from './pages/Admin';
 import { Error } from './pages/Error';
@@ -53,8 +53,8 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="admin/products/create" element={<NewProduct />} />
         <Route path="admin/products/:id/edit" element={<NewProduct />} />
-        <Route path="admin/brands/create" element={<NewBrand />} />
-        <Route path="admin/brands/:id/edit" element={<NewBrand />} />
+        <Route path="admin/brands/create" element={<Brand title="Cadastrar Marca" />} />
+        <Route path="admin/brands/:id/edit" element={<Brand title="Editar Marca" />} />
         <Route path="admin" element={<Admin />} />
 
         <Route path="*" element={<Error />} />

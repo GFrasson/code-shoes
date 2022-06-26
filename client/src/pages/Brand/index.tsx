@@ -1,5 +1,5 @@
-import React, { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { FormEvent, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { ImageInput } from '../../components/ImageInput';
 import { Navbar } from '../../components/Navbar';
@@ -8,10 +8,15 @@ import api from '../../services/api';
 
 import { promiseNotify } from '../../utils/promiseNotify';
 
-import { NewBrandContainer } from './style';
+import { BrandContainer } from './style';
 
-export function NewBrand() {
+interface BrandProps {
+    title: string;
+}
+
+export function Brand({ title }: BrandProps) {
     const navigate = useNavigate();
+    const params = useParams();
 
     const [name, setName] = useState<string>('');
     const [image, setImage] = useState<File | null>(null);
@@ -27,11 +32,26 @@ export function NewBrand() {
         }
 
         try {
-            await promiseNotify(api.post('/brands', data), {
-                pending: "Cadastrando marca",
-                success: "Marca cadastrada com sucesso!",
-                error: "Erro ao cadastrar a marca"
-            });
+            let promise;
+            let messages;
+
+            if (params.id) {
+                promise = api.put(`/brands/${params.id}`, data);
+                messages = {
+                    pending: "Atualizando marca",
+                    success: "Marca atualizada com sucesso!",
+                    error: "Erro ao atualizar a marca"
+                };
+            } else {
+                promise = api.post('/brands', data);
+                messages = {
+                    pending: "Cadastrando marca",
+                    success: "Marca cadastrada com sucesso!",
+                    error: "Erro ao cadastrar a marca"
+                };
+            }
+
+            await promiseNotify(promise, messages);
          
             navigate('/admin');
         } catch (err) {
@@ -39,12 +59,20 @@ export function NewBrand() {
         }
     }
 
+    useEffect(() => {
+        if (params.id) {
+            api.get(`/brands/${params.id}`).then(response => {
+                setName(response.data.name);
+            });
+        }
+    }, [params.id]);
+
     return (
-        <NewBrandContainer>
+        <BrandContainer>
             <Navbar />
 
             <main>
-                <h1 className='form-title'>Cadastrar Marca</h1>
+                <h1 className='form-title'>{ title }</h1>
 
                 <form className='page-form' onSubmit={handleSubmit}>
                     <section className='md:grid md:grid-cols-2 md:gap-6'>
@@ -62,6 +90,7 @@ export function NewBrand() {
                                 name='name'
                                 autoComplete="given-brand"
                                 placeholder='Nome da marca...'
+                                value={name}
                                 onChange={(event) => setName(event.target.value)}
                                 required
                             />
@@ -81,13 +110,13 @@ export function NewBrand() {
                             type='submit'
                             className='form-submit'
                         >
-                            Cadastrar
+                            Salvar
                         </button>
 
                     </section>
                 </form>
             </main>
 
-        </NewBrandContainer>
+        </BrandContainer>
     );
 }
