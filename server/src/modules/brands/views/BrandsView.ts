@@ -1,15 +1,25 @@
-import { Brand } from "@prisma/client";
+import ProductsView, { IProductView } from "../../products/views/ProductsView";
+
+export interface IBrandView {
+    id: string;
+    name: string;
+    image?: string;
+    products?: IProductView[];
+}
 
 export default {
-    render(brand: Brand) {
+    render(brand: IBrandView) {
         return {
             id: brand.id,
             name: brand.name,
-            image: `http://localhost:8080/uploads/img/brands/${brand.image}`,
+            image: brand.image
+                ? `http://localhost:8080/uploads/img/brands/${brand.image}`
+                : undefined,
+            products: brand.products ? ProductsView.renderMany(brand.products) : undefined,
         };
     },
 
-    renderMany(brands: Brand[]) {
+    renderMany(brands: IBrandView[]) {
         return brands.map((brand) => this.render(brand));
     },
 };

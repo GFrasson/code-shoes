@@ -7,15 +7,15 @@ interface ICreateProductDTO {
     image: string;
 }
 
-interface IProduct extends Product {
+interface IProductWithBrand extends Product {
     brand: Brand;
 }
 
 interface IProductsRepository {
-    list(): Promise<IProduct[]>;
+    list(): Promise<IProductWithBrand[]>;
     findById(id: string): Promise<Product>;
     findByName(name: string): Promise<Product>;
     create(data: ICreateProductDTO): Promise<Product>;
 }
 
-export { IProductsRepository, ICreateProductDTO, IProduct };
+export { IProductsRepository, ICreateProductDTO, IProductWithBrand };

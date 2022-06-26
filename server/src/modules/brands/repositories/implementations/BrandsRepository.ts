@@ -1,4 +1,4 @@
-import { Brand, User } from "@prisma/client";
+import { Brand } from "@prisma/client";
 
 import { prisma } from "../../../../database/prisma";
 import { IBrandsRepository, ICreateBrandDTO, IUpdateBrandDTO } from "../IBrandsRepository";
@@ -16,8 +16,12 @@ class BrandsRepository implements IBrandsRepository {
         return BrandsRepository.INSTANCE;
     }
 
-    async list(): Promise<Brand[]> {
-        const brands = await prisma.brand.findMany();
+    async list(includeProducts = false): Promise<Brand[]> {
+        const brands = await prisma.brand.findMany({
+            include: {
+                products: includeProducts,
+            },
+        });
         return brands;
     }
 

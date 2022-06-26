@@ -12,7 +12,7 @@ interface IUpdateBrandDTO {
 }
 
 interface IBrandsRepository {
-    list(): Promise<Brand[]>;
+    list(includeProducts?: boolean): Promise<Brand[]>;
     findById(id: string): Promise<Brand>;
     findByName(name: string): Promise<Brand>;
     create(data: ICreateBrandDTO): Promise<Brand>;
