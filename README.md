@@ -19,7 +19,9 @@
 #### Back-end
 - [ ] CRUD Produtos
 - [ ] CRUD Marca
+- [x] Upload de imagem
 - [x] Busca dos últimos produtos cadastrados no banco
+- [ ] Documentação dos endpoints
 <br />
 
 ---

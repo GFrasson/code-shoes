@@ -21,6 +21,17 @@ interface Product {
 export function Admin() {
     const [brands, setBrands] = useState<Brand[]>([]);
 
+    function onProductDelete(deletedProductId: string) {
+        setBrands(
+            brands.map(brand => {
+                return {
+                    ...brand,
+                    products: brand.products.filter(product => product.id !== deletedProductId),
+                }
+            })
+        );
+    }
+
     useEffect(() => {
         api.get('/brands?products=true').then(response => {
             setBrands(response.data);
@@ -48,6 +59,7 @@ export function Admin() {
                                             brandName={brand.name}
                                             brandImage={brand.image}
                                             products={brand.products}
+                                            onProductDelete={onProductDelete}
                                         />
                                     );
                                 })

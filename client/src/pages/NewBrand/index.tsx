@@ -6,7 +6,7 @@ import { Navbar } from '../../components/Navbar';
 
 import api from '../../services/api';
 
-import { promiseRegisterNotify } from '../../utils/promiseRegisterNotify';
+import { promiseNotify } from '../../utils/promiseNotify';
 
 import { NewBrandContainer } from './style';
 
@@ -27,7 +27,11 @@ export function NewBrand() {
         }
 
         try {
-            await promiseRegisterNotify(api.post('/brands', data));
+            await promiseNotify(api.post('/brands', data), {
+                pending: "Cadastrando marca",
+                success: "Marca cadastrada com sucesso!",
+                error: "Erro ao cadastrar a marca"
+            });
          
             navigate('/admin');
         } catch (err) {

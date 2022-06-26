@@ -3,7 +3,7 @@ import { Navbar } from '../../components/Navbar';
 import { ImageInput } from '../../components/ImageInput';
 
 import { NewProductContainer } from './style';
-import { promiseRegisterNotify } from '../../utils/promiseRegisterNotify';
+import { promiseNotify } from '../../utils/promiseNotify';
 import api from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -33,7 +33,11 @@ export function NewProduct() {
         data.append('image', image || '');
 
         try {
-            await promiseRegisterNotify(api.post('/products', data));
+            await promiseNotify(api.post('/products', data), {
+                pending: "Cadastrando produto",
+                success: "Produto cadastrado com sucesso!",
+                error: "Erro ao cadastrar o produto"
+            });
 
             navigate('/admin');
         } catch (err) {

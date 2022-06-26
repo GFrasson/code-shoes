@@ -20,6 +20,7 @@ interface IProductsRepository {
     findById(id: string): Promise<Product>;
     findByName(name: string): Promise<Product>;
     create(data: ICreateProductDTO): Promise<Product>;
+    delete(id: string): Promise<void>;
 }
 
 export { IProductsRepository, ICreateProductDTO, IProductWithBrand, IProductsListOptions };

@@ -1,14 +1,17 @@
-import React, { ReactNode, useState } from "react";
+import React, { useState } from "react";
 import { Plus, Minus, Pencil, Trash } from "phosphor-react";
 
 import { CardCollapseContainer } from "./style";
 import { Link } from "react-router-dom";
+import { promiseNotify } from "../../utils/promiseNotify";
+import api from "../../services/api";
 
 interface CardCollapseProps {
     brandId: string;
     brandName: string;
     brandImage?: string;
     products: Product[];
+    onProductDelete: (deletedProductId: string) => void;
 }
 
 interface Product {
@@ -20,6 +23,23 @@ interface Product {
 
 export function CardCollapse(props: CardCollapseProps) {
     const [isCardOpen, setIsCardOpen] = useState(false);
+
+    async function handleBrandDelete(brandId: string) {
+
+    } 
+
+    async function handleProductDelete(productId: string) {
+        try {
+            await promiseNotify(api.delete(`/products/${productId}`), {
+                pending: "Deletando produto",
+                success: "Produto deletado com sucesso!",
+                error: "Erro ao deletar o produto"
+            });
+
+            props.onProductDelete(productId);
+        } catch (err) {
+        }
+    }
 
     return (
         <CardCollapseContainer className={`${isCardOpen && 'open'}`}>
@@ -39,9 +59,12 @@ export function CardCollapse(props: CardCollapseProps) {
                     <Link to={`brands/${props.brandId}/edit`}>
                         <Pencil size={20} />
                     </Link>
-                    <Link className="ml-2" to="">
+                    <button 
+                        className="ml-2"
+                        onClick={() => handleBrandDelete(props.brandId)}
+                    >
                         <Trash size={20} />
-                    </Link>
+                    </button>
                     <div className="collapse-button-container">
                         <button
                             className="collapse-button"
@@ -73,9 +96,12 @@ export function CardCollapse(props: CardCollapseProps) {
                                                 <Link to={`products/${product.id}/edit`}>
                                                     <Pencil size={20} />
                                                 </Link>
-                                                <Link className="ml-2" to="">
+                                                <button 
+                                                    className="ml-2"
+                                                    onClick={() => handleProductDelete(product.id)}
+                                                >
                                                     <Trash size={20} />
-                                                </Link>
+                                                </button>
                                             </div>
                                         </div>
                                     );
