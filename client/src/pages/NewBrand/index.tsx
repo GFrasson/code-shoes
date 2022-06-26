@@ -26,9 +26,13 @@ export function NewBrand() {
             data.append('image', image);
         }
 
-        await promiseRegisterNotify(api.post('/brands', data));
-
-        navigate('/admin');
+        try {
+            await promiseRegisterNotify(api.post('/brands', data));
+         
+            navigate('/admin');
+        } catch (err) {
+            // console.log(err.response.data.message);
+        }
     }
 
     return (

@@ -11,7 +11,7 @@ class ListBrandsUseCase {
     constructor(private brandsRepository: IBrandsRepository) {}
 
     async execute({ includeProducts }: IRequest): Promise<Brand[]> {
-        let brands = await this.brandsRepository.list(includeProducts);
+        let brands = await this.brandsRepository.list({ includeProducts });
 
         brands = BrandsView.renderMany(brands);
 

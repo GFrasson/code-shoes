@@ -30,24 +30,31 @@ export function Admin() {
     return (
         <AdminContainer>
             <Navbar />
-            
+
             <main>
-                <h1 className='title'>Admin</h1>
-
                 {
-                    brands.map(brand => {
-                        return (
-                            <CardCollapse
-                                key={brand.id}
-                                brandId={brand.id}
-                                brandName={brand.name}
-                                brandImage={brand.image}
-                                products={brand.products}
-                            />
-                        );
-                    })
-                }
+                    brands.length === 0 ? (
+                        <p className='text-light-300 font-semibold'>Carregando...</p>
+                    ) : (
+                        <>
+                            <h1 className='title'>Admin</h1>
 
+                            {
+                                brands.map(brand => {
+                                    return (
+                                        <CardCollapse
+                                            key={brand.id}
+                                            brandId={brand.id}
+                                            brandName={brand.name}
+                                            brandImage={brand.image}
+                                            products={brand.products}
+                                        />
+                                    );
+                                })
+                            }
+                        </>
+                    )
+                }
             </main>
 
         </AdminContainer>
