@@ -5,17 +5,21 @@
 ### Features
 
 #### Front-end
-- [ ] Página Home
-- [ ] Página Produtos
-- [ ] Página Carrinho
-- [ ] Página Cadastrar Produto
-- [ ] Página Cadastrar Marca
-- [ ] Página Admin
+- [x] Página Home
+- [x] Página Produtos
+- [x] Página Carrinho
+- [x] Página Compra realizada
+- [x] Página Cadastrar Produto
+- [x] Página Cadastrar Marca
+- [x] Página Admin
+- [x] Página Erro
+- [ ] Filtro Dinâmico
+- [ ] Responsividade
 
 #### Back-end
 - [ ] CRUD Produtos
 - [ ] CRUD Marca
-- [ ] Busca dos últimos produtos cadastrados no banco
+- [x] Busca dos últimos produtos cadastrados no banco
 <br />
 
 ---
