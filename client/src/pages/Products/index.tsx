@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { CartContext } from '../../App';
+import React, { useEffect, useState } from 'react';
 import { Card } from '../../components/Card';
 import { Navbar } from '../../components/Navbar';
 import api from '../../services/api';
@@ -25,8 +24,8 @@ interface ProductsProps {
 }
 
 export function Products({ addToCart }: ProductsProps) {
-    const [products, setProducts] = useState<Product[]>();
-    const [brands, setBrands] = useState<Brand[]>();
+    const [products, setProducts] = useState<Product[]>([]);
+    const [brands, setBrands] = useState<Brand[]>([]);
 
     useEffect(() => {
         api.get('/products').then(response => {
@@ -38,7 +37,7 @@ export function Products({ addToCart }: ProductsProps) {
         });
     }, []);
 
-    if (!brands || !products) {
+    if (brands.length === 0 || products.length === 0) {
         return (
             <ProductsContainer>
                 <Navbar />
@@ -84,7 +83,7 @@ export function Products({ addToCart }: ProductsProps) {
                             className="py-2 px-3 border w-[10.6rem] text-gray-700 bg-light-300 rounded-[0.625rem] shadow-sm focus:outline-none focus:ring-primary-300 focus:border-primary-300 sm:text-sm"
                         >
                             {
-                                brands?.map(brand => {
+                                brands.map(brand => {
                                     return (
                                         <option 
                                             key={brand.id} 
@@ -100,7 +99,7 @@ export function Products({ addToCart }: ProductsProps) {
                 </div>
                 <div id='productsContainer'>
                     {
-                        products?.map(product => {
+                        products.map(product => {
                             return (
                                 <Card 
                                     key={product.id}

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { FlatCardContainer } from "./styles";
 
 interface FlatCardProps {
     productName: string;
     productPrice: number;
     productImageURL: string;
-    brandImageURL: string;
+    brandImageURL?: string;
     itemNumber: number;
     isSelected: boolean;
     onFlatCardSelect: (itemSelected: number) => void;
@@ -19,7 +19,10 @@ export function FlatCard(props: FlatCardProps) {
                 onClick={() => props.onFlatCardSelect(props.itemNumber)}
             >
                 <div className="images-container">
-                    <img className='brand-image' src={props.brandImageURL} alt="Imagem da marca do tênis" />
+                    {
+                        props.brandImageURL &&
+                        <img className='brand-image' src={props.brandImageURL} alt="Imagem da marca do tênis" />
+                    }
                     <img className="shoe-image" src={props.productImageURL} alt="Imagem de um tênis" />    
                 </div>
                 <div className="content-box">
