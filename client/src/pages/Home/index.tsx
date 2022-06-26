@@ -28,7 +28,7 @@ export function Home() {
     useEffect(() => {
         api.get("/products/latest").then(response => {
             setProducts(response.data);
-        })
+        });
     }, []);
 
     function onFlatCardSelect(itemSelected: number): void {

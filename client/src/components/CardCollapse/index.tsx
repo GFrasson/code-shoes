@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import { Plus, Minus, Pencil, Trash } from "phosphor-react";
 
-import { CardCollapseContainer } from "./style";
-import { Link } from "react-router-dom";
 import { promiseNotify } from "../../utils/promiseNotify";
 import api from "../../services/api";
+
+import { CardCollapseContainer } from "./style";
 
 interface CardCollapseProps {
     brandId: string;
@@ -26,6 +28,12 @@ export function CardCollapse(props: CardCollapseProps) {
     const [isCardOpen, setIsCardOpen] = useState(false);
 
     async function handleBrandDelete(brandId: string) {
+        const deleteBrand = confirm('Deseja mesmo deletar a marca? Todos os produtos associados a ela também serão excluídos!');
+
+        if (!deleteBrand) {
+            return;
+        }
+
         try {
             await promiseNotify(api.delete(`/brands/${brandId}`), {
                 pending: "Deletando marca",
@@ -36,9 +44,15 @@ export function CardCollapse(props: CardCollapseProps) {
             props.onBrandDelete(brandId);
         } catch (err) {
         }
-    } 
+    }
 
     async function handleProductDelete(productId: string) {
+        const deleteProduct = confirm('Deseja mesmo deletar o produto?');
+
+        if (!deleteProduct) {
+            return;
+        }
+
         try {
             await promiseNotify(api.delete(`/products/${productId}`), {
                 pending: "Deletando produto",
@@ -57,7 +71,7 @@ export function CardCollapse(props: CardCollapseProps) {
                 <div className="w-28 h-16">
                     {
                         props.brandImage &&
-                        <img className="brand-image" src={ props.brandImage } alt={`Logo da marca ${props.brandName}`} />
+                        <img className="brand-image" src={props.brandImage} alt={`Logo da marca ${props.brandName}`} />
                     }
                 </div>
 
@@ -69,7 +83,7 @@ export function CardCollapse(props: CardCollapseProps) {
                     <Link to={`brands/${props.brandId}/edit`}>
                         <Pencil size={20} />
                     </Link>
-                    <button 
+                    <button
                         className="ml-2"
                         onClick={() => handleBrandDelete(props.brandId)}
                     >
@@ -106,7 +120,7 @@ export function CardCollapse(props: CardCollapseProps) {
                                                 <Link to={`products/${product.id}/edit`}>
                                                     <Pencil size={20} />
                                                 </Link>
-                                                <button 
+                                                <button
                                                     className="ml-2"
                                                     onClick={() => handleProductDelete(product.id)}
                                                 >

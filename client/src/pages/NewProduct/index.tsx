@@ -90,6 +90,7 @@ export function NewProduct() {
                             <input
                                 className="mr-4 w-[18.75rem] text-gray-700 bg-light-300 border-none focus:ring-primary-300 focus:border-primary-300 shadow-sm sm:text-sm rounded-[0.625rem]"
                                 type='number'
+                                step="0.01"
                                 id='price'
                                 name='price'
                                 autoComplete="given-price"
