@@ -6,6 +6,7 @@ import {
     IProductsListOptions,
     IProductsRepository,
     IProductWithBrand,
+    IUpdateProductDTO,
 } from "../IProductsRepository";
 
 class ProductsRepository implements IProductsRepository {
@@ -75,6 +76,22 @@ class ProductsRepository implements IProductsRepository {
         });
 
         return product;
+    }
+
+    async update({ id, name, price, image, brandId }: IUpdateProductDTO): Promise<Product> {
+        const updatedProduct = await prisma.product.update({
+            where: {
+                id,
+            },
+            data: {
+                name,
+                price,
+                image,
+                brandId,
+            },
+        });
+
+        return updatedProduct;
     }
 
     async delete(id: string): Promise<void> {

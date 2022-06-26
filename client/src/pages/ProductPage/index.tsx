@@ -2,10 +2,10 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import { Navbar } from '../../components/Navbar';
 import { ImageInput } from '../../components/ImageInput';
 
-import { NewProductContainer } from './style';
+import { ProductPageContainer } from './style';
 import { promiseNotify } from '../../utils/promiseNotify';
 import api from '../../services/api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface Brand {
     id: string;
@@ -13,8 +13,13 @@ interface Brand {
     image?: string;
 }
 
-export function NewProduct() {
+interface ProductPageProps {
+    title: string;
+}
+
+export function ProductPage({ title }: ProductPageProps) {
     const navigate = useNavigate();
+    const params = useParams();
 
     const [brands, setBrands] = useState<Brand[]>([]);
     const [name, setName] = useState<string>('');
@@ -33,11 +38,26 @@ export function NewProduct() {
         data.append('image', image || '');
 
         try {
-            await promiseNotify(api.post('/products', data), {
-                pending: "Cadastrando produto",
-                success: "Produto cadastrado com sucesso!",
-                error: "Erro ao cadastrar o produto"
-            });
+            let promise;
+            let messages;
+
+            if (params.id) {
+                promise = api.put(`/products/${params.id}`, data);
+                messages = {
+                    pending: "Atualizando produto",
+                    success: "Produto atualizado com sucesso!",
+                    error: "Erro ao atualizar o produto"
+                };
+            } else {
+                promise = api.post('/products', data);
+                messages = {
+                    pending: "Cadastrando produto",
+                    success: "Produto cadastrado com sucesso!",
+                    error: "Erro ao cadastrar o produto"
+                };
+            }
+
+            await promiseNotify(promise, messages);
 
             navigate('/admin');
         } catch (err) {
@@ -50,14 +70,23 @@ export function NewProduct() {
             setBrands(response.data);
             setBrand(response.data[0].id);
         })
-    }, []);
+
+        if (params.id) {
+            api.get(`/products/${params.id}`).then(response => {
+                setName(response.data.name);
+                setPrice(response.data.price);
+                setBrand(response.data.brand.id);
+            });
+
+        }
+    }, [params.id]);
 
     return (
-        <NewProductContainer>
+        <ProductPageContainer>
             <Navbar />
 
             <main>
-                <h1 className='form-title'>Cadastrar Produto</h1>
+                <h1 className='form-title'>{ title }</h1>
 
                 <form className='page-form' onSubmit={handleSubmit}>
                     <section className='md:grid md:grid-cols-2 md:gap-6'>
@@ -76,6 +105,7 @@ export function NewProduct() {
                                 autoComplete="given-product"
                                 placeholder='Nome do produto...'
                                 required
+                                value={name}
                                 onChange={(event) => setName(event.target.value)}
                             />
                         </div>
@@ -96,6 +126,7 @@ export function NewProduct() {
                                 autoComplete="given-price"
                                 placeholder='Preço'
                                 required
+                                value={price}
                                 onChange={(event) => setPrice(Number(event.target.value))}
                             />
                         </div>
@@ -113,6 +144,7 @@ export function NewProduct() {
                                 autoComplete="brand-name"
                                 className="py-2 px-3 border w-[18.75rem] text-gray-700 bg-light-300 border-none rounded-[0.625rem] shadow-sm focus:outline-none focus:ring-primary-300 focus:border-primary-300 sm:text-sm"
                                 required
+                                value={brand}
                                 onChange={(event) => setBrand(event.target.value)}
                             >
                                 {
@@ -142,13 +174,13 @@ export function NewProduct() {
                             type='submit'
                             className='form-submit'
                         >
-                            Cadastrar
+                            Salvar
                         </button>
 
                     </section>
                 </form>
             </main>
 
-        </NewProductContainer>
+        </ProductPageContainer>
     );
 }

@@ -8,6 +8,7 @@ import deleteProductController from "../modules/products/useCases/deleteProduct"
 import listLatestProdutsController from "../modules/products/useCases/listLatestProducts";
 import listProductsController from "../modules/products/useCases/listProducts";
 import showProductController from "../modules/products/useCases/showProduct";
+import updateProductController from "../modules/products/useCases/updateProduct";
 
 const productsRoutes = Router();
 
@@ -27,6 +28,10 @@ productsRoutes.get("/:id", async (req, res) => {
 
 productsRoutes.post("/", uploadImage.single("image"), async (req, res) => {
     await createProductController().handle(req, res);
+});
+
+productsRoutes.put("/:id", uploadImage.single("image"), async (req, res) => {
+    await updateProductController().handle(req, res);
 });
 
 productsRoutes.delete("/:id", async (req, res) => {

@@ -7,6 +7,14 @@ interface ICreateProductDTO {
     image: string;
 }
 
+interface IUpdateProductDTO {
+    id: string;
+    name: string;
+    price: number;
+    image: string;
+    brandId: string;
+}
+
 interface IProductWithBrand extends Product {
     brand: Brand;
 }
@@ -20,7 +28,14 @@ interface IProductsRepository {
     findById(id: string): Promise<Product>;
     findByName(name: string): Promise<Product>;
     create(data: ICreateProductDTO): Promise<Product>;
+    update(data: IUpdateProductDTO): Promise<Product>;
     delete(id: string): Promise<void>;
 }
 
-export { IProductsRepository, ICreateProductDTO, IProductWithBrand, IProductsListOptions };
+export {
+    IProductsRepository,
+    ICreateProductDTO,
+    IUpdateProductDTO,
+    IProductWithBrand,
+    IProductsListOptions,
+};

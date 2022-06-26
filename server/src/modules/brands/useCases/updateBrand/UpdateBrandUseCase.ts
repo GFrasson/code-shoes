@@ -25,6 +25,12 @@ class UpdateBrandUseCase {
             await deleteFile(resolve("uploads", "img", "brands", brand.image));
         }
 
+        const brandAlreadyExists = await this.brandsRepository.findByName(name);
+
+        if (brand.name !== name && brandAlreadyExists) {
+            throw new AppError("Brand already exists");
+        }
+
         brand = await this.brandsRepository.update({
             id,
             name,

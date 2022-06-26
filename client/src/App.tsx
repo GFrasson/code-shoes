@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 // Pages
 import { Home } from './pages/Home';
 import { Product, Products } from './pages/Products';
-import { NewProduct } from './pages/NewProduct';
+import { ProductPage } from './pages/ProductPage';
 import { Brand } from './pages/Brand';
 import { Login } from './pages/Login';
 import { Admin } from './pages/Admin';
@@ -51,8 +51,8 @@ function App() {
         } />
         <Route path="success" element={<SuccessfulPurchase />} />
         <Route path="login" element={<Login />} />
-        <Route path="admin/products/create" element={<NewProduct />} />
-        <Route path="admin/products/:id/edit" element={<NewProduct />} />
+        <Route path="admin/products/create" element={<ProductPage title="Cadastrar Produto" />} />
+        <Route path="admin/products/:id/edit" element={<ProductPage title="Editar Produto" />} />
         <Route path="admin/brands/create" element={<Brand title="Cadastrar Marca" />} />
         <Route path="admin/brands/:id/edit" element={<Brand title="Editar Marca" />} />
         <Route path="admin" element={<Admin />} />
