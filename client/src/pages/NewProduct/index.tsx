@@ -37,7 +37,7 @@ export function NewProduct() {
 
             navigate('/admin');
         } catch (err) {
-            console.log(err.response.data.message);
+            // console.log(err.response.data.message);
         }
     }
 
