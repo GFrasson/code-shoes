@@ -15,11 +15,13 @@ import { SuccessfulPurchase } from './pages/SuccessfulPurchase';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PrivateRoutes } from './routes';
+import { AuthContext, useAuth } from './auth';
 
 export const CartContext = createContext<Product[]>([]);
 
 function App() {
   const [cart, setCart] = useState<Product[]>([]);
+  const auth = useAuth();
 
   function addToCart(product: Product): void {
     const productAlreadyOnCart = cart.some(cartProduct => cartProduct.id === product.id);
@@ -40,42 +42,44 @@ function App() {
   }
 
   return (
-    <CartContext.Provider value={cart}>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="products" element={<Products addToCart={addToCart} />} />
-        <Route path="cart" element={
-          <Cart 
-            removeFromCart={removeFromCart}
-            cleanCart={cleanCart}
-          />
-        } />
-        <Route path="success" element={<SuccessfulPurchase />} />
-        <Route path="login" element={<Login />} />
-        <Route element={<PrivateRoutes />}>
-          <Route path="admin" element={<Admin />} />
-          <Route path="admin/products/create" element={<ProductPage title="Cadastrar Produto" />} />
-          <Route path="admin/products/:id/edit" element={<ProductPage title="Editar Produto" />} />
-          <Route path="admin/brands/create" element={<Brand title="Cadastrar Marca" />} />
-          <Route path="admin/brands/:id/edit" element={<Brand title="Editar Marca" />} />
-        </Route>
+    <AuthContext.Provider value={auth}>
+      <CartContext.Provider value={cart}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="products" element={<Products addToCart={addToCart} />} />
+          <Route path="cart" element={
+            <Cart 
+              removeFromCart={removeFromCart}
+              cleanCart={cleanCart}
+            />
+          } />
+          <Route path="success" element={<SuccessfulPurchase />} />
+          <Route path="login" element={<Login />} />
+          <Route element={<PrivateRoutes />}>
+            <Route path="admin" element={<Admin />} />
+            <Route path="admin/products/create" element={<ProductPage title="Cadastrar Produto" />} />
+            <Route path="admin/products/:id/edit" element={<ProductPage title="Editar Produto" />} />
+            <Route path="admin/brands/create" element={<Brand title="Cadastrar Marca" />} />
+            <Route path="admin/brands/:id/edit" element={<Brand title="Editar Marca" />} />
+          </Route>
 
-        <Route path="*" element={<Error />} />
-      </Routes>
+          <Route path="*" element={<Error />} />
+        </Routes>
 
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      <ToastContainer />
-    </CartContext.Provider>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <ToastContainer />
+      </CartContext.Provider>
+    </AuthContext.Provider>
   );
 }
 

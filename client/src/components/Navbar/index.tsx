@@ -4,10 +4,12 @@ import { ShoppingCart, SmileySticker, Package, UserGear,  SignIn, SignOut } from
 
 import { NavbarContainer } from './style';
 import { CartContext } from '../../App';
+import { AuthContext } from '../../auth';
 
 export function Navbar() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const cart = useContext(CartContext);
+    const auth = useContext(AuthContext);
 
     return (
         <NavbarContainer>
@@ -32,12 +34,27 @@ export function Navbar() {
 
                     <nav className="md:flex space-x-10">
                         <div className="relative">
-                            <button 
-                                className='user'
-                                onClick={() => setDropdownOpen(!dropdownOpen)}
-                            >
-                                <img src="https://cdn-icons-png.flaticon.com/512/236/236831.png" className='user-avatar' />
-                            </button>
+                            <div>
+                                {
+                                    auth.authenticated ? (
+                                        <button 
+                                            className='user'
+                                            onClick={() => setDropdownOpen(!dropdownOpen)}
+                                        >
+                                            <img src="https://cdn-icons-png.flaticon.com/512/236/236831.png" className='user-avatar' />
+                                        </button>
+                                    ) : (
+                                        <button
+                                            className='user'
+                                            onClick={async () => await auth.login()}
+                                        >
+                                            <span className='flex justify-center'>
+                                                <SignIn size={24} /> Entrar
+                                            </span>
+                                        </button>
+                                    )
+                                }
+                            </div>
 
                             <div className={`${!dropdownOpen && 'hidden'} dropdown absolute z-10 -ml-4 mt-8 transform px-2 w-screen max-w-[15rem] sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2`}>
                                 <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
@@ -63,13 +80,19 @@ export function Navbar() {
                                                 <p className="mt-1 text-sm text-gray-500">Acessar a área administrativa</p>
                                             </div>
                                         </Link>
-                                        <Link to="/logout" className="-m-3 p-3 flex items-start rounded-lg hover:bg-dark-300">
+                                        <button 
+                                            className="-m-3 p-3 flex items-start rounded-lg hover:bg-dark-300"
+                                            onClick={async () => {
+                                                await auth.logout();
+                                                setDropdownOpen(false);
+                                            }}
+                                        >
                                             <SignOut size={18} />
                                             <div className="ml-4">
                                                 <p className="text-base font-medium text-light-300">Logout</p>
                                                 <p className="mt-1 text-sm text-gray-500">Sair</p>
                                             </div>
-                                        </Link>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
