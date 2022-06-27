@@ -24,8 +24,8 @@ export const CardContainer = styled.div`
             position: absolute;
             top: 0.5rem;
             left: 0.8rem;
-            width: 1.5rem;
-            height: 1.5rem;
+            width: 2rem;
+            height: 2rem;
             object-fit: contain;
         }
 
@@ -52,6 +52,7 @@ export const CardContainer = styled.div`
             .title {
                 color: var(--dark-300);
                 font-size: 1.5rem;
+                text-align: center;
             }
 
             .price {

@@ -26,8 +26,8 @@ export const WideCardContainer = styled.div`
             position: absolute;
             top: 0.25rem;
             left: 0.75rem;
-            width: 1.5rem;
-            height: 1.5rem;
+            width: 2.5rem;
+            height: 2.5rem;
             object-fit: contain;
         }
 

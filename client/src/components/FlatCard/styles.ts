@@ -25,8 +25,8 @@ export const FlatCardContainer = styled.div`
                 position: absolute;
                 top: 0.25rem;
                 left: 0.75rem;
-                width: 1.5rem;
-                height: 1.5rem;
+                width: 2rem;
+                height: 2rem;
                 object-fit: contain;
             }
 
