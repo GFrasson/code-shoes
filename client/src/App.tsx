@@ -14,6 +14,7 @@ import { SuccessfulPurchase } from './pages/SuccessfulPurchase';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { PrivateRoutes } from './routes';
 
 export const CartContext = createContext<Product[]>([]);
 
@@ -51,11 +52,13 @@ function App() {
         } />
         <Route path="success" element={<SuccessfulPurchase />} />
         <Route path="login" element={<Login />} />
-        <Route path="admin/products/create" element={<ProductPage title="Cadastrar Produto" />} />
-        <Route path="admin/products/:id/edit" element={<ProductPage title="Editar Produto" />} />
-        <Route path="admin/brands/create" element={<Brand title="Cadastrar Marca" />} />
-        <Route path="admin/brands/:id/edit" element={<Brand title="Editar Marca" />} />
-        <Route path="admin" element={<Admin />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path="admin" element={<Admin />} />
+          <Route path="admin/products/create" element={<ProductPage title="Cadastrar Produto" />} />
+          <Route path="admin/products/:id/edit" element={<ProductPage title="Editar Produto" />} />
+          <Route path="admin/brands/create" element={<Brand title="Cadastrar Marca" />} />
+          <Route path="admin/brands/:id/edit" element={<Brand title="Editar Marca" />} />
+        </Route>
 
         <Route path="*" element={<Error />} />
       </Routes>

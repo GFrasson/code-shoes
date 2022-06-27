@@ -36,8 +36,7 @@ export function Navbar() {
                                 className='user'
                                 onClick={() => setDropdownOpen(!dropdownOpen)}
                             >
-                                <div className='user-avatar'>
-                                </div>
+                                <img src="https://cdn-icons-png.flaticon.com/512/236/236831.png" className='user-avatar' />
                             </button>
 
                             <div className={`${!dropdownOpen && 'hidden'} dropdown absolute z-10 -ml-4 mt-8 transform px-2 w-screen max-w-[15rem] sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2`}>
