@@ -21,6 +21,8 @@ interface IProductWithBrand extends Product {
 
 interface IProductsListOptions {
     take?: number;
+    search?: string;
+    brand?: string;
 }
 
 interface IProductsRepository {

@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
 import { Card } from '../../components/Card';
 import { Navbar } from '../../components/Navbar';
+
+import {X} from 'phosphor-react';
+
 import api from '../../services/api';
 
 import { ProductsContainer } from './style';
@@ -26,25 +31,20 @@ interface ProductsProps {
 export function Products({ addToCart }: ProductsProps) {
     const [products, setProducts] = useState<Product[]>([]);
     const [brands, setBrands] = useState<Brand[]>([]);
+    const [search, setSearch] = useState<string>('');
+    const [brandSelected, setBrandSelected] = useState<string>('');
 
     useEffect(() => {
-        api.get('/products').then(response => {
-            setProducts(response.data);
-        });
-
         api.get('/brands').then(response => {
             setBrands(response.data);
         });
     }, []);
 
-    if (brands.length === 0 || products.length === 0) {
-        return (
-            <ProductsContainer>
-                <Navbar />
-                <p className='text-light-300 font-semibold'>Carregando...</p>
-            </ProductsContainer>
-        );
-    }
+    useEffect(() => {
+        api.get(`/products?search=${search}&brand=${brandSelected}`).then(response => {
+            setProducts(response.data);
+        });
+    }, [search, brandSelected]);
 
     return (
         <ProductsContainer>
@@ -66,6 +66,8 @@ export function Products({ addToCart }: ProductsProps) {
                             name='product'
                             autoComplete="given-product"
                             placeholder='Nome do produto...'
+                            value={search}
+                            onChange={(event) => setSearch(event.target.value)}
                         />
                     </div>
 
@@ -80,8 +82,11 @@ export function Products({ addToCart }: ProductsProps) {
                             id="brand"
                             name="brand"
                             autoComplete="brand-name"
-                            className="py-2 px-3 border w-[10.6rem] text-gray-700 bg-light-300 rounded-[0.625rem] shadow-sm focus:outline-none focus:ring-primary-300 focus:border-primary-300 sm:text-sm"
+                            className="py-2 px-3 border w-[10.6rem] text-gray-500 bg-light-300 rounded-[0.625rem] shadow-sm focus:outline-none focus:ring-primary-300 focus:border-primary-300 sm:text-sm"
+                            value={brandSelected}
+                            onChange={(event) => setBrandSelected(event.target.value)}
                         >
+                            <option hidden value="">Marca...</option>
                             {
                                 brands.map(brand => {
                                     return (
@@ -95,21 +100,35 @@ export function Products({ addToCart }: ProductsProps) {
                                 })
                             }
                         </select>
+                        <span className="clean-brand-filter">
+                            {
+                                brandSelected &&
+                                <button 
+                                    className='text-light-300 ml-2'
+                                    onClick={() => setBrandSelected('')}
+                                >
+                                    <X size={16} />
+                                </button>
+                            }
+                        </span>
                     </div>
                 </div>
                 <div id='productsContainer'>
                     {
-                        products.map(product => {
-                            return (
-                                <Card 
-                                    key={product.id}
-                                    product={product}
-                                    onAddToCart={addToCart}
-                                />
-                            );
-                        })
+                        products.length === 0 ? (
+                            <p className='text-light-300 font-semibold'>Nenhum produto encontrado :(</p>
+                        ) : (
+                            products.map(product => {
+                                return (
+                                    <Card 
+                                        key={product.id}
+                                        product={product}
+                                        onAddToCart={addToCart}
+                                    />
+                                );
+                            })
+                        )
                     }
-                    
                 </div>
             </main>
         </ProductsContainer>

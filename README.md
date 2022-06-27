@@ -13,7 +13,7 @@
 - [x] Página Cadastrar Marca
 - [x] Página Admin
 - [x] Página Erro
-- [ ] Filtro Dinâmico
+- [x] Filtro Dinâmico
 - [ ] Responsividade
 
 #### Back-end
@@ -21,6 +21,7 @@
 - [x] CRUD Marca
 - [x] Upload de imagem
 - [x] Busca dos últimos produtos cadastrados no banco
+- [ ] Autenticação
 - [ ] Documentação dos endpoints
 <br />
 

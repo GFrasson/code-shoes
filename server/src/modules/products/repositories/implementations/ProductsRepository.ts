@@ -30,7 +30,23 @@ class ProductsRepository implements IProductsRepository {
             orderBy: {
                 createdAt: "desc",
             },
-            ...options,
+            where: {
+                AND: {
+                    ...(options.search && {
+                        name: {
+                            contains: options.search,
+                        },
+                    }),
+                    ...(options.brand && {
+                        brandId: {
+                            equals: options.brand,
+                        },
+                    }),
+                },
+            },
+            ...(options.take && {
+                take: options.take,
+            }),
         });
 
         return products;
